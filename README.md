@@ -3,7 +3,7 @@ Sorts a given picture's pixels for a cool animation.
 
 ## Running PixelSort
 
-    pixelsorter /path/to/image
+    pixelsorter /path/to/image [framerate, default 60] [seconds of animation to produce, default 10]
 	
 For example, if the target path was `/home/hexafluoride/test.png`, the output images would be located in `/home/hexafluoride/test/test-%d.png` where `%d` is frame number.
 
