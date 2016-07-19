@@ -20,12 +20,12 @@ namespace PixelSort
 
             Bitmap bmp = new Bitmap(path);
             var pixels = ReadPixels(bmp);
-            var ordered = pixels.OrderBy(p => p.Value.GetBrightness()).ToList();
+            var ordered = pixels.OrderBy(p => CalculateLuminance(p.Value)).ToList();
 
             // set these two values
 
-            int frame_rate = 60;
-            int seconds = 10;
+            int frame_rate = TryGetArgument(60, 1, args);
+            int seconds = TryGetArgument(10, 2, args);
 
             int total_frames = frame_rate * seconds;
 
@@ -61,6 +61,18 @@ namespace PixelSort
             }
 
             Console.WriteLine("Done.");
+        }
+
+        static int TryGetArgument(int def, int index, string[] args)
+        {
+            if(args.Count() > index)
+            {
+                int temp = 0;
+                if (int.TryParse(args[index], out temp))
+                    return temp;
+            }
+
+            return def;
         }
 
         static void SwapPixels(Bitmap bmp, Point first, Point second)
